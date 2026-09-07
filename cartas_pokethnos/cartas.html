@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokéthnos — Cartas</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #EE1515;
+    --red-dark: #B80D0D;
+    --blue: #2A4BA0;
+    --blue-dark: #1B3170;
+    --yellow: #FFCB05;
+    --sky: #E7EFF7;
+    --sky-2: #D5E3F0;
+    --panel: #FFFFFF;
+    --panel-2: #F4F8FC;
+    --ink: #22303F;
+    --ink-soft: #5B7086;
+    --line: #CFDCE8;
+    --shadow-sm: 0 2px 6px rgba(34, 48, 63, .18);
+    --shadow-md: 0 6px 18px rgba(34, 48, 63, .22);
+    --card-w: 118px;
+    --card-h: 158px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--sky), var(--sky-2));
+    color: var(--ink);
+    font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(180deg, var(--red), var(--red-dark));
+    color: #fff;
+    padding: 22px 20px 18px;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  h1 {
+    font-family: 'Baloo 2', system-ui, sans-serif;
+    font-size: 2rem;
+    margin: 0 0 14px;
+    text-align: center;
+    letter-spacing: .5px;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, .22);
+  }
+
+  .filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .filtro {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: .82rem;
+    border: 3px solid rgba(255, 255, 255, .55);
+    background: rgba(255, 255, 255, .14);
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform .1s ease, background .15s ease, border-color .15s ease;
+  }
+  .filtro:hover { transform: translateY(-2px); background: rgba(255, 255, 255, .26); }
+  .filtro.ativo {
+    background: var(--yellow);
+    color: #4A3600;
+    border-color: #fff;
+  }
+
+  main { padding: 24px 20px 60px; max-width: 1280px; margin: 0 auto; }
+
+  section { margin-bottom: 38px; }
+
+  h2 {
+    font-family: 'Baloo 2', system-ui, sans-serif;
+    font-size: 1.35rem;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 .icone { font-size: 1.5rem; }
+
+  h3 {
+    font-family: 'Baloo 2', system-ui, sans-serif;
+    font-size: .95rem;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+  }
+
+  .grade {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .regiao-bloco { margin-bottom: 16px; }
+
+  .card {
+    width: var(--card-w);
+    height: var(--card-h);
+    border-radius: 12px;
+    position: relative;
+    border: 3px solid var(--card-border, #999);
+    background: var(--panel);
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .card-dragon { border-color: #FF8A3D; }
+
+  .card-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .card-badge {
+    position: absolute; top: 3px; left: 3px;
+    background: #fff; border-radius: 999px;
+    padding: 1px 6px; font-size: .78rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .28);
+  }
+
+  .card-evo-badge {
+    position: absolute; top: 3px; right: 3px;
+    background: var(--yellow); color: #4A3600;
+    font-size: .55rem; font-weight: 800;
+    padding: 2px 5px; border-radius: 999px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .28);
+  }
+
+  .card-name-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, .78) 45%);
+    color: #fff; font-size: .64rem; font-weight: 800;
+    padding: 8px 4px 3px; text-align: center; line-height: 1.15;
+  }
+
+  .trainer {
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url('img/treinadores.png');
+    flex-shrink: 0;
+  }
+
+  .treinador-item {
+    background: var(--panel);
+    border: 3px solid var(--blue);
+    border-radius: 14px;
+    padding: 10px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .treinador-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .treinador-nome { font-size: .72rem; font-weight: 800; color: var(--blue-dark); }
+
+  .campo-item {
+    width: 220px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 4px solid var(--campo-cor);
+    background: var(--panel);
+    box-shadow: var(--shadow-sm);
+    transition: transform .12s ease, box-shadow .12s ease;
+  }
+  .campo-item:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .campo-img { width: 100%; height: 96px; object-fit: cover; display: block; }
+  .campo-nome {
+    background: var(--campo-cor);
+    color: #fff;
+    font-weight: 800;
+    font-size: .8rem;
+    text-align: center;
+    padding: 7px 6px;
+  }
+
+  .oculto { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Pokéthnos</h1>
+  <div class="filtros" id="filtros"></div>
+</header>
+
+<main>
+  <div id="tribos"></div>
+
+  <section id="sec-dragoes">
+    <h2><span class="icone">🐉</span> Dragões</h2>
+    <div class="grade" id="dragoes"></div>
+  </section>
+
+  <section id="sec-treinadores">
+    <h2><span class="icone">🎽</span> Treinadores</h2>
+    <div class="grade" id="treinadores"></div>
+  </section>
+
+  <section id="sec-campos">
+    <h2><span class="icone">🗺️</span> Campos</h2>
+    <div class="grade" id="campos"></div>
+  </section>
+</main>
+
+<script>
+/* ---------------------------------------------------------------
+   Dados espelhados de backend/src/main/java/com/pokethnos/engine/GameData.java
+   --------------------------------------------------------------- */
+
+const REGIOES = [
+  { id: 'marrom',   nome: 'Deserto',            cor: '#8B6914' },
+  { id: 'verde',    nome: 'Floresta Densa',     cor: '#2E7D32' },
+  { id: 'vermelho', nome: 'Vulcão em Erupção',  cor: '#C62828' },
+  { id: 'azul',     nome: 'Templo do Mar',      cor: '#1565C0' },
+  { id: 'roxo',     nome: 'Cemitério',          cor: '#6A1B9A' },
+  { id: 'cinza',    nome: 'Cidade Abandonada',  cor: '#546E7A' },
+];
+
+/* Cada tribo traz os nomes na ordem das regioes: base, evoluido, base, evoluido... */
+const TRIBOS = [
+  { id: 'voadores',  nome: 'Voadores',  icone: '🦅',
+    nomes: ['Archen','Archeops','Combee','Vespiquen','Fletchling','Talonflame','Wingull','Pelipper','Vullaby','Mandibuzz','Doduo','Dodrio'] },
+  { id: 'venenosos', nome: 'Venenosos', icone: '☠',
+    nomes: ['Nidoran♂','Nidoking','Bulbasaur','Venusaur','Larvesta','Volcarona','Tentacool','Tentacruel','Gastly','Gengar','Grimer','Muk'] },
+  { id: 'psiquicos', nome: 'Psíquicos', icone: '✨',
+    nomes: ['Baltoy','Claydol','Exeggcute','Exeggutor','Fennekin','Delphox','Psyduck','Golduck','Misdreavus','Mismagius','Espurr','Meowstic'] },
+  { id: 'metalicos', nome: 'Metálicos', icone: '⚙',
+    nomes: ['A.Diglett','A.Dugtrio','Ferroseed','Ferrothorn','Rolycoly','Coalossal','Piplup','Empoleon','Honedge','Aegislash','Beldum','Metagross'] },
+  { id: 'fadas',     nome: 'Fadas',     icone: '⭐',
+    nomes: ['Carbink','Diancie','Cottonee','Whimsicott','Litwick','Chandelure','Popplio','Primarina','G.Ponyta','G.Rapidash','Clefairy','Clefable'] },
+  { id: 'lutadores', nome: 'Lutadores', icone: '👊',
+    nomes: ['Riolu','Lucario','Grookey','Rillaboom','Torchic','Blaziken','Clobbopus','Grapploct','Cubone','Marowak','Timburr','Conkeldurr'] },
+];
+
+const DRAGOES = ['Dratini', 'Dragonair', 'Dragonite'];
+
+const IMAGENS = {
+  'Archen':'archen.png','Archeops':'archeops.jpeg','Combee':'combee.jpeg','Vespiquen':'vespiquen.jpeg',
+  'Fletchling':'fletchling.jpeg','Talonflame':'talonflame.jpeg','Wingull':'wingull.png','Pelipper':'pelipper.jpeg',
+  'Vullaby':'vullaby.jpeg','Mandibuzz':'mandibuzz.jpeg','Doduo':'doduo.jpeg','Dodrio':'dodrio.png',
+  'Nidoran♂':'nidoran.jpeg','Nidoking':'nidoking.jpeg','Bulbasaur':'bulbasaur.jpeg','Venusaur':'venusaur.png',
+  'Larvesta':'larvesta.png','Volcarona':'volcarona.jpeg','Tentacool':'tentacool.jpeg','Tentacruel':'tentacruel.jpeg',
+  'Gastly':'gastly.jpeg','Gengar':'gengar.jpeg','Grimer':'grimer.jpeg','Muk':'muk.jpeg',
+  'Baltoy':'baltoy.jpeg','Claydol':'claydol.jpeg','Exeggcute':'exeggcute.jpeg','Exeggutor':'exeggcutor.jpeg',
+  'Fennekin':'fennekin.jpeg','Delphox':'delphox.png','Psyduck':'psyduck.png','Golduck':'golduck.jpeg',
+  'Misdreavus':'misdreavus.png','Mismagius':'mismagius.png','Espurr':'espurr.jpeg','Meowstic':'meowstic.jpeg',
+  'A.Diglett':'alolan diglett.png','A.Dugtrio':'alolan dugtrio.png','Ferroseed':'ferroseed.jpeg','Ferrothorn':'ferrothorn.jpeg',
+  'Rolycoly':'rolycoly.jpeg','Coalossal':'coalossal.jpeg','Piplup':'piplup.jpeg','Empoleon':'empoleon.jpeg',
+  'Honedge':'honedge.jpeg','Aegislash':'aegislash.jpeg','Beldum':'beldum.jpeg','Metagross':'metagross.png',
+  'Carbink':'carbink.png','Diancie':'diancie.jpeg','Cottonee':'cottonee.jpeg','Whimsicott':'whimscott.jpeg',
+  'Litwick':'litwick.jpeg','Chandelure':'chandelure.jpeg','Popplio':'popplio.png','Primarina':'primarina.png',
+  'G.Ponyta':'galarian ponyta.jpeg','G.Rapidash':'galarian rapidash.jpeg','Clefairy':'clefairy.jpeg','Clefable':'clafable.jpeg',
+  'Riolu':'riolu.jpeg','Lucario':'lucario.jpeg','Grookey':'grookey.png','Rillaboom':'rillaboom.jpeg',
+  'Torchic':'torchic.png','Blaziken':'blaziken.jpeg','Clobbopus':'clobbopus.jpeg','Grapploct':'grapploct.jpeg',
+  'Cubone':'cubone.jpeg','Marowak':'marowak.png','Timburr':'timburr.jpeg','Conkeldurr':'conkeldurr.jpeg',
+  'Dratini':'dratini.png','Dragonair':'dragonair.png','Dragonite':'dragonite.png',
+};
+
+const TRAINER_COLS = 3, TRAINER_ROWS = 2;
+const TRAINER_ASPECT = 364 / 400;
+const TREINADORES = ['Boné Laranja','Tranças','Pesquisador','Mecha Roxa','Cabelo Prata','Macacão'];
+
+/* --------------------------------------------------------------- */
+
+function montaCarta({ nome, cor, icone, evoluido, dragao }) {
+  const el = document.createElement('div');
+  el.className = 'card' + (dragao ? ' card-dragon' : '');
+  el.style.setProperty('--card-border', dragao ? '#c9a010' : cor);
+
+  const img = document.createElement('img');
+  img.className = 'card-img';
+  img.src = 'img/pokemon/' + IMAGENS[nome];
+  img.alt = nome;
+  img.loading = 'lazy';
+  el.appendChild(img);
+
+  if (!dragao) {
+    const badge = document.createElement('div');
+    badge.className = 'card-badge';
+    badge.textContent = icone;
+    el.appendChild(badge);
+  }
+
+  if (evoluido) {
+    const evo = document.createElement('div');
+    evo.className = 'card-evo-badge';
+    evo.textContent = '★EVO';
+    el.appendChild(evo);
+  }
+
+  const nomeEl = document.createElement('div');
+  nomeEl.className = 'card-name-overlay';
+  nomeEl.textContent = nome;
+  el.appendChild(nomeEl);
+
+  return el;
+}
+
+function montaTribos() {
+  const alvo = document.getElementById('tribos');
+
+  TRIBOS.forEach((tribo) => {
+    const sec = document.createElement('section');
+    sec.dataset.tribo = tribo.id;
+
+    const h2 = document.createElement('h2');
+    h2.innerHTML = '<span class="icone">' + tribo.icone + '</span>';
+    h2.appendChild(document.createTextNode(' ' + tribo.nome));
+    sec.appendChild(h2);
+
+    REGIOES.forEach((regiao, i) => {
+      const bloco = document.createElement('div');
+      bloco.className = 'regiao-bloco';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = regiao.nome;
+      bloco.appendChild(h3);
+
+      const grade = document.createElement('div');
+      grade.className = 'grade';
+      [tribo.nomes[i * 2], tribo.nomes[i * 2 + 1]].forEach((nome, k) => {
+        grade.appendChild(montaCarta({
+          nome, cor: regiao.cor, icone: tribo.icone, evoluido: k === 1, dragao: false,
+        }));
+      });
+      bloco.appendChild(grade);
+      sec.appendChild(bloco);
+    });
+
+    alvo.appendChild(sec);
+  });
+}
+
+function montaDragoes() {
+  const alvo = document.getElementById('dragoes');
+  DRAGOES.forEach((nome) => {
+    alvo.appendChild(montaCarta({ nome, dragao: true }));
+  });
+}
+
+function montaTreinadores() {
+  const alvo = document.getElementById('treinadores');
+  const altura = 150;
+  const largura = Math.round(altura * TRAINER_ASPECT);
+
+  TREINADORES.forEach((nome, i) => {
+    const col = i % TRAINER_COLS;
+    const row = Math.floor(i / TRAINER_COLS);
+
+    const item = document.createElement('div');
+    item.className = 'treinador-item';
+
+    const sprite = document.createElement('span');
+    sprite.className = 'trainer';
+    sprite.style.width = largura + 'px';
+    sprite.style.height = altura + 'px';
+    sprite.style.backgroundSize = (TRAINER_COLS * 100) + '% ' + (TRAINER_ROWS * 100) + '%';
+    sprite.style.backgroundPosition =
+      (col * (100 / (TRAINER_COLS - 1))) + '% ' + (row * 100) + '%';
+    item.appendChild(sprite);
+
+    const label = document.createElement('div');
+    label.className = 'treinador-nome';
+    label.textContent = nome;
+    item.appendChild(label);
+
+    alvo.appendChild(item);
+  });
+}
+
+function montaCampos() {
+  const alvo = document.getElementById('campos');
+  REGIOES.forEach((regiao) => {
+    const item = document.createElement('div');
+    item.className = 'campo-item';
+    item.style.setProperty('--campo-cor', regiao.cor);
+
+    const img = document.createElement('img');
+    img.className = 'campo-img';
+    img.src = 'img/biomas/' + regiao.id + '.jpg';
+    img.alt = regiao.nome;
+    img.loading = 'lazy';
+    item.appendChild(img);
+
+    const nome = document.createElement('div');
+    nome.className = 'campo-nome';
+    nome.textContent = regiao.nome;
+    item.appendChild(nome);
+
+    alvo.appendChild(item);
+  });
+}
+
+function montaFiltros() {
+  const alvo = document.getElementById('filtros');
+  const opcoes = [
+    { id: 'todas', rotulo: 'Todas' },
+    ...TRIBOS.map((t) => ({ id: t.id, rotulo: t.icone + ' ' + t.nome })),
+    { id: 'dragoes', rotulo: '🐉 Dragões' },
+    { id: 'treinadores', rotulo: '🎽 Treinadores' },
+    { id: 'campos', rotulo: '🗺️ Campos' },
+  ];
+
+  opcoes.forEach((opcao) => {
+    const botao = document.createElement('button');
+    botao.className = 'filtro' + (opcao.id === 'todas' ? ' ativo' : '');
+    botao.textContent = opcao.rotulo;
+    botao.dataset.alvo = opcao.id;
+    botao.addEventListener('click', () => aplicaFiltro(opcao.id, botao));
+    alvo.appendChild(botao);
+  });
+}
+
+function aplicaFiltro(id, botao) {
+  document.querySelectorAll('.filtro').forEach((b) => b.classList.toggle('ativo', b === botao));
+
+  document.querySelectorAll('#tribos section').forEach((sec) => {
+    sec.classList.toggle('oculto', id !== 'todas' && sec.dataset.tribo !== id);
+  });
+
+  const mostraExtra = (elId, chave) => {
+    document.getElementById(elId).classList.toggle('oculto', id !== 'todas' && id !== chave);
+  };
+  mostraExtra('sec-dragoes', 'dragoes');
+  mostraExtra('sec-treinadores', 'treinadores');
+  mostraExtra('sec-campos', 'campos');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+montaTribos();
+montaDragoes();
+montaTreinadores();
+montaCampos();
+montaFiltros();
+</script>
+
+</body>
+</html>
