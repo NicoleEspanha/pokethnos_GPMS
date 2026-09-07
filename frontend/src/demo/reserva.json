@@ -1,0 +1,200 @@
+[
+ {
+  "id": "7ad08771-ae96-407c-b226-3fd7aa89fe54",
+  "name": "Honedge",
+  "cls": "metalicos",
+  "triboIcon": "⚙",
+  "regionId": "roxo",
+  "regionColor": "#6A1B9A",
+  "evolved": false,
+  "dragon": false,
+  "imageFile": "honedge.jpeg"
+ },
+ {
+  "id": "8712da40-f648-4927-bd46-31efe2087a51",
+  "name": "Exeggutor",
+  "cls": "psiquicos",
+  "triboIcon": "✨",
+  "regionId": "verde",
+  "regionColor": "#2E7D32",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "exeggcutor.jpeg"
+ },
+ {
+  "id": "fc188b5d-09d4-4202-b65a-852574eef41f",
+  "name": "Pelipper",
+  "cls": "voadores",
+  "triboIcon": "🦅",
+  "regionId": "azul",
+  "regionColor": "#1565C0",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "pelipper.jpeg"
+ },
+ {
+  "id": "4259d5d6-790c-4240-b9b5-615233ab885b",
+  "name": "Beldum",
+  "cls": "metalicos",
+  "triboIcon": "⚙",
+  "regionId": "cinza",
+  "regionColor": "#546E7A",
+  "evolved": false,
+  "dragon": false,
+  "imageFile": "beldum.jpeg"
+ },
+ {
+  "id": "3ef2f195-3f11-419c-b8ed-446c74f7d89d",
+  "name": "Litwick",
+  "cls": "fadas",
+  "triboIcon": "⭐",
+  "regionId": "vermelho",
+  "regionColor": "#C62828",
+  "evolved": false,
+  "dragon": false,
+  "imageFile": "litwick.jpeg"
+ },
+ {
+  "id": "e0cffbed-e314-45e2-8047-1bd2343ce455",
+  "name": "Archeops",
+  "cls": "voadores",
+  "triboIcon": "🦅",
+  "regionId": "marrom",
+  "regionColor": "#8B6914",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "archeops.jpeg"
+ },
+ {
+  "id": "028570c1-c181-4259-9334-f090072bfd60",
+  "name": "Metagross",
+  "cls": "metalicos",
+  "triboIcon": "⚙",
+  "regionId": "cinza",
+  "regionColor": "#546E7A",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "metagross.png"
+ },
+ {
+  "id": "bdc615b3-5fe9-4e26-b1a9-c3123cc867da",
+  "name": "Timburr",
+  "cls": "lutadores",
+  "triboIcon": "👊",
+  "regionId": "cinza",
+  "regionColor": "#546E7A",
+  "evolved": false,
+  "dragon": false,
+  "imageFile": "timburr.jpeg"
+ },
+ {
+  "id": "41b3f5b7-297b-40bc-a573-0028d51cf213",
+  "name": "Doduo",
+  "cls": "voadores",
+  "triboIcon": "🦅",
+  "regionId": "cinza",
+  "regionColor": "#546E7A",
+  "evolved": false,
+  "dragon": false,
+  "imageFile": "doduo.jpeg"
+ },
+ {
+  "id": "02d4d603-7e9b-4073-8471-fa99f12ecdc7",
+  "name": "Diancie",
+  "cls": "fadas",
+  "triboIcon": "⭐",
+  "regionId": "marrom",
+  "regionColor": "#8B6914",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "diancie.jpeg"
+ },
+ {
+  "id": "528fa094-3e10-4be2-8130-fb62c52037f3",
+  "name": "Clefairy",
+  "cls": "fadas",
+  "triboIcon": "⭐",
+  "regionId": "cinza",
+  "regionColor": "#546E7A",
+  "evolved": false,
+  "dragon": false,
+  "imageFile": "clefairy.jpeg"
+ },
+ {
+  "id": "455e774b-9e3c-440b-bd96-7aa198032d2c",
+  "name": "Venusaur",
+  "cls": "venenosos",
+  "triboIcon": "☠",
+  "regionId": "verde",
+  "regionColor": "#2E7D32",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "venusaur.png"
+ },
+ {
+  "id": "7b8a7e7a-e1cb-4cf4-8599-a2ba838e1546",
+  "name": "G.Rapidash",
+  "cls": "fadas",
+  "triboIcon": "⭐",
+  "regionId": "roxo",
+  "regionColor": "#6A1B9A",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "galarian rapidash.jpeg"
+ },
+ {
+  "id": "e7a4779f-374b-434c-9cd8-7c9f748ccdcc",
+  "name": "Mismagius",
+  "cls": "psiquicos",
+  "triboIcon": "✨",
+  "regionId": "roxo",
+  "regionColor": "#6A1B9A",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "mismagius.png"
+ },
+ {
+  "id": "b90721cc-e1fd-49f5-9daa-8b756c76eec0",
+  "name": "Whimsicott",
+  "cls": "fadas",
+  "triboIcon": "⭐",
+  "regionId": "verde",
+  "regionColor": "#2E7D32",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "whimscott.jpeg"
+ },
+ {
+  "id": "b9c5c532-c67e-4dd3-9d24-fb424895a413",
+  "name": "A.Dugtrio",
+  "cls": "metalicos",
+  "triboIcon": "⚙",
+  "regionId": "marrom",
+  "regionColor": "#8B6914",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "alolan dugtrio.png"
+ },
+ {
+  "id": "977b4a0c-69cb-499c-91a5-e6108e8e99b6",
+  "name": "Wingull",
+  "cls": "voadores",
+  "triboIcon": "🦅",
+  "regionId": "azul",
+  "regionColor": "#1565C0",
+  "evolved": false,
+  "dragon": false,
+  "imageFile": "wingull.png"
+ },
+ {
+  "id": "a78a0eb7-ee94-4dc6-abc4-4ab1426cc1b1",
+  "name": "Meowstic",
+  "cls": "psiquicos",
+  "triboIcon": "✨",
+  "regionId": "cinza",
+  "regionColor": "#546E7A",
+  "evolved": true,
+  "dragon": false,
+  "imageFile": "meowstic.jpeg"
+ }
+]
