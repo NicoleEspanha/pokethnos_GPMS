@@ -192,6 +192,123 @@
     padding: 7px 6px;
   }
 
+  /* ---------- moodboard ---------- */
+
+  .mood-sub {
+    font-family: 'Baloo 2', system-ui, sans-serif;
+    font-size: 1rem;
+    color: var(--blue-dark);
+    margin: 22px 0 10px;
+    padding-left: 10px;
+    border-left: 5px solid var(--yellow);
+  }
+
+  .ref-grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 14px;
+  }
+
+  .ref-item {
+    background: var(--panel);
+    border: 3px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+  }
+  .ref-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--blue-light);
+  }
+  .ref-img { width: 100%; display: block; background: var(--panel-2); }
+  .ref-nome {
+    font-weight: 800;
+    font-size: .78rem;
+    color: var(--ink);
+    padding: 9px 12px;
+    border-top: 3px solid var(--line);
+  }
+
+  .paleta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cor-item {
+    width: 108px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--panel);
+    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--line);
+  }
+  .cor-amostra { height: 62px; }
+  .cor-rotulo {
+    padding: 6px 7px;
+    font-size: .62rem;
+    font-weight: 800;
+    line-height: 1.4;
+  }
+  .cor-hex { color: var(--ink-soft); font-family: ui-monospace, monospace; }
+
+  .tipo-grade { display: flex; flex-wrap: wrap; gap: 14px; }
+  .tipo-item {
+    background: var(--panel);
+    border: 3px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow-sm);
+    min-width: 260px;
+  }
+  .tipo-nome {
+    font-size: .68rem;
+    font-weight: 800;
+    color: var(--ink-soft);
+    font-family: ui-monospace, monospace;
+    margin-bottom: 8px;
+  }
+  .tipo-baloo { font-family: 'Baloo 2', system-ui, sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--red); }
+  .tipo-nunito { font-family: 'Nunito', system-ui, sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--blue); }
+
+  .anatomia { display: flex; flex-wrap: wrap; gap: 26px; align-items: center; }
+  .anatomia .card { width: 210px; height: 282px; }
+  .anatomia .card-name-overlay { font-size: 1rem; padding: 16px 8px 7px; }
+  .anatomia .card-badge { font-size: 1.3rem; padding: 3px 11px; }
+  .anatomia .card-evo-badge { font-size: .82rem; padding: 4px 9px; }
+
+  .legenda { display: flex; flex-direction: column; gap: 9px; }
+  .legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: .8rem;
+  }
+  .legenda-marca {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: grid; place-items: center;
+    font-size: .9rem;
+    background: var(--panel-2);
+    border: 2px solid var(--line);
+    flex-shrink: 0;
+  }
+
+  .tribo-grade { display: flex; flex-wrap: wrap; gap: 12px; }
+  .tribo-chip {
+    background: var(--panel);
+    border: 3px solid var(--blue);
+    border-radius: 14px;
+    padding: 14px 8px 10px;
+    width: 116px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform .12s ease;
+  }
+  .tribo-chip:hover { transform: translateY(-4px); }
+  .tribo-chip .icone-grande { font-size: 2.1rem; display: block; }
+  .tribo-chip .rotulo { font-size: .74rem; font-weight: 800; color: var(--blue-dark); margin-top: 5px; }
+
+  .faixa-campos { display: flex; gap: 4px; border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-sm); }
+  .faixa-campos img { width: 100%; height: 84px; object-fit: cover; display: block; flex: 1; min-width: 0; }
+
   .oculto { display: none; }
 </style>
 </head>
@@ -218,6 +335,28 @@
   <section id="sec-campos">
     <h2><span class="icone">🗺️</span> Campos</h2>
     <div class="grade" id="campos"></div>
+  </section>
+
+  <section id="sec-moodboard">
+    <h2><span class="icone">🎨</span> Moodboard</h2>
+
+    <h3 class="mood-sub">Referências</h3>
+    <div class="ref-grade" id="referencias"></div>
+
+    <h3 class="mood-sub">Paleta</h3>
+    <div class="paleta" id="paleta"></div>
+
+    <h3 class="mood-sub">Tipografia</h3>
+    <div class="tipo-grade" id="tipografia"></div>
+
+    <h3 class="mood-sub">Anatomia da carta</h3>
+    <div class="anatomia" id="anatomia"></div>
+
+    <h3 class="mood-sub">Tribos</h3>
+    <div class="tribo-grade" id="tribo-chips"></div>
+
+    <h3 class="mood-sub">Atmosfera</h3>
+    <div class="faixa-campos" id="faixa-campos"></div>
   </section>
 </main>
 
@@ -410,6 +549,161 @@ function montaCampos() {
   });
 }
 
+/* ---------------------------------------------------------------
+   Moodboard
+   --------------------------------------------------------------- */
+
+const REFERENCIAS = [
+  { arq: 'pokemon-unite-papeis.jpg',         nome: 'Pokémon UNITE — categorias em painéis' },
+  { arq: 'tcg-cartas-fisicas.webp',          nome: 'Cartas físicas do TCG' },
+  { arq: 'cardchase-app-claro.webp',         nome: 'App de cartas — tema claro' },
+  { arq: 'pokemon-go-botoes.jpg',            nome: 'Pokémon GO — botões e ícones' },
+  { arq: 'card-game-indie-tabuleiro.webp',   nome: 'Card game indie — tabuleiro' },
+  { arq: 'poker-arena-escuro.webp',          nome: 'Jogo de mesa — tema escuro' },
+];
+
+/* Tokens de :root em frontend/src/styles/app.css */
+const PALETA = [
+  { nome: 'red',        hex: '#EE1515' },
+  { nome: 'red-dark',   hex: '#B80D0D' },
+  { nome: 'blue',       hex: '#2A4BA0' },
+  { nome: 'blue-dark',  hex: '#1B3170' },
+  { nome: 'blue-light', hex: '#4E7BE0' },
+  { nome: 'yellow',     hex: '#FFCB05' },
+  { nome: 'yellow-dark',hex: '#D9A400' },
+  { nome: 'sky',        hex: '#E7EFF7' },
+  { nome: 'sky-2',      hex: '#D5E3F0' },
+  { nome: 'panel',      hex: '#FFFFFF' },
+  { nome: 'panel-2',    hex: '#F4F8FC' },
+  { nome: 'ink',        hex: '#22303F' },
+  { nome: 'ink-soft',   hex: '#5B7086' },
+  { nome: 'line',       hex: '#CFDCE8' },
+  { nome: 'grass',      hex: '#6BC26F' },
+  { nome: 'grass-2',    hex: '#3E8F46' },
+  { nome: 'good',       hex: '#2E9E52' },
+  { nome: 'bad',        hex: '#D93A3A' },
+];
+
+const TIPOGRAFIA = [
+  { fonte: "'Baloo 2' 800", classe: 'tipo-baloo',  amostra: 'Pokéthnos' },
+  { fonte: "'Nunito' 800",  classe: 'tipo-nunito', amostra: 'Vulcão em Erupção' },
+];
+
+const ANATOMIA = [
+  { marca: '▭', rotulo: 'Borda — cor da região' },
+  { marca: '⭐', rotulo: 'Selo da tribo' },
+  { marca: '★',  rotulo: 'Marca de evoluído' },
+  { marca: '▁',  rotulo: 'Nome em degradê' },
+];
+
+function montaReferencias() {
+  const alvo = document.getElementById('referencias');
+  REFERENCIAS.forEach((ref) => {
+    const item = document.createElement('div');
+    item.className = 'ref-item';
+
+    const img = document.createElement('img');
+    img.className = 'ref-img';
+    img.src = 'img/referencias/' + ref.arq;
+    img.alt = ref.nome;
+    img.loading = 'lazy';
+    item.appendChild(img);
+
+    const nome = document.createElement('div');
+    nome.className = 'ref-nome';
+    nome.textContent = ref.nome;
+    item.appendChild(nome);
+
+    alvo.appendChild(item);
+  });
+}
+
+function montaPaleta() {
+  const alvo = document.getElementById('paleta');
+  PALETA.forEach((cor) => {
+    const item = document.createElement('div');
+    item.className = 'cor-item';
+
+    const amostra = document.createElement('div');
+    amostra.className = 'cor-amostra';
+    amostra.style.background = cor.hex;
+    item.appendChild(amostra);
+
+    const rotulo = document.createElement('div');
+    rotulo.className = 'cor-rotulo';
+    rotulo.innerHTML = '--' + cor.nome + '<br><span class="cor-hex">' + cor.hex + '</span>';
+    item.appendChild(rotulo);
+
+    alvo.appendChild(item);
+  });
+}
+
+function montaTipografia() {
+  const alvo = document.getElementById('tipografia');
+  TIPOGRAFIA.forEach((t) => {
+    const item = document.createElement('div');
+    item.className = 'tipo-item';
+
+    const nome = document.createElement('div');
+    nome.className = 'tipo-nome';
+    nome.textContent = t.fonte;
+    item.appendChild(nome);
+
+    const amostra = document.createElement('div');
+    amostra.className = t.classe;
+    amostra.textContent = t.amostra;
+    item.appendChild(amostra);
+
+    alvo.appendChild(item);
+  });
+}
+
+function montaAnatomia() {
+  const alvo = document.getElementById('anatomia');
+
+  /* Clefable evoluída: tribo Fadas, região Cidade Abandonada */
+  alvo.appendChild(montaCarta({
+    nome: 'Clefable', cor: '#546E7A', icone: '⭐', evoluido: true, dragao: false,
+  }));
+
+  const legenda = document.createElement('div');
+  legenda.className = 'legenda';
+  ANATOMIA.forEach((a) => {
+    const linha = document.createElement('div');
+    linha.className = 'legenda-item';
+    const marca = document.createElement('span');
+    marca.className = 'legenda-marca';
+    marca.textContent = a.marca;
+    linha.appendChild(marca);
+    linha.appendChild(document.createTextNode(a.rotulo));
+    legenda.appendChild(linha);
+  });
+  alvo.appendChild(legenda);
+}
+
+function montaTriboChips() {
+  const alvo = document.getElementById('tribo-chips');
+  TRIBOS.forEach((tribo) => {
+    const chip = document.createElement('div');
+    chip.className = 'tribo-chip';
+    chip.innerHTML =
+      '<span class="icone-grande">' + tribo.icone + '</span>' +
+      '<div class="rotulo">' + tribo.nome + '</div>';
+    alvo.appendChild(chip);
+  });
+}
+
+function montaFaixaCampos() {
+  const alvo = document.getElementById('faixa-campos');
+  REGIOES.forEach((regiao) => {
+    const img = document.createElement('img');
+    img.src = 'img/biomas/' + regiao.id + '.jpg';
+    img.alt = regiao.nome;
+    img.loading = 'lazy';
+    alvo.appendChild(img);
+  });
+}
+
 function montaFiltros() {
   const alvo = document.getElementById('filtros');
   const opcoes = [
@@ -418,6 +712,7 @@ function montaFiltros() {
     { id: 'dragoes', rotulo: '🐉 Dragões' },
     { id: 'treinadores', rotulo: '🎽 Treinadores' },
     { id: 'campos', rotulo: '🗺️ Campos' },
+    { id: 'moodboard', rotulo: '🎨 Moodboard' },
   ];
 
   opcoes.forEach((opcao) => {
@@ -443,6 +738,7 @@ function aplicaFiltro(id, botao) {
   mostraExtra('sec-dragoes', 'dragoes');
   mostraExtra('sec-treinadores', 'treinadores');
   mostraExtra('sec-campos', 'campos');
+  mostraExtra('sec-moodboard', 'moodboard');
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -451,6 +747,12 @@ montaTribos();
 montaDragoes();
 montaTreinadores();
 montaCampos();
+montaReferencias();
+montaPaleta();
+montaTipografia();
+montaAnatomia();
+montaTriboChips();
+montaFaixaCampos();
 montaFiltros();
 </script>
 
