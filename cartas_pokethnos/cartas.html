@@ -153,7 +153,7 @@
   .trainer {
     display: block;
     background-repeat: no-repeat;
-    background-image: url('img/treinadores.png');
+    background-image: url('../frontend/src/assets/treinadores.png');
     flex-shrink: 0;
   }
 
@@ -362,6 +362,17 @@
 
 <script>
 /* ---------------------------------------------------------------
+   As imagens vem do proprio frontend do jogo, em vez de uma copia
+   aqui dentro — trocar a arte de uma carta no jogo ja reflete nesta
+   pagina, e o repositorio nao carrega o mesmo arquivo duas vezes.
+   Só as referencias do moodboard ficam em img/referencias/, porque
+   nao existem em nenhum outro lugar.
+   --------------------------------------------------------------- */
+
+const DIR_POKEMON = '../frontend/public/imagens-pokemon/';
+const DIR_BIOMAS  = '../frontend/src/assets/biomas/';
+
+/* ---------------------------------------------------------------
    Dados espelhados de backend/src/main/java/com/pokethnos/engine/GameData.java
    --------------------------------------------------------------- */
 
@@ -393,24 +404,24 @@ const TRIBOS = [
 const DRAGOES = ['Dratini', 'Dragonair', 'Dragonite'];
 
 const IMAGENS = {
-  'Archen':'archen.png','Archeops':'archeops.jpeg','Combee':'combee.jpeg','Vespiquen':'vespiquen.jpeg',
+  'Archen':'archen.png','Archeops':'archeops.png','Combee':'combee.jpeg','Vespiquen':'vespiquen.jpeg',
   'Fletchling':'fletchling.jpeg','Talonflame':'talonflame.jpeg','Wingull':'wingull.png','Pelipper':'pelipper.jpeg',
-  'Vullaby':'vullaby.jpeg','Mandibuzz':'mandibuzz.jpeg','Doduo':'doduo.jpeg','Dodrio':'dodrio.png',
+  'Vullaby':'vullaby.jpeg','Mandibuzz':'mandibuzz.jpeg','Doduo':'doduo.png','Dodrio':'dodrio.png',
   'Nidoran♂':'nidoran.jpeg','Nidoking':'nidoking.jpeg','Bulbasaur':'bulbasaur.jpeg','Venusaur':'venusaur.png',
   'Larvesta':'larvesta.png','Volcarona':'volcarona.jpeg','Tentacool':'tentacool.jpeg','Tentacruel':'tentacruel.jpeg',
   'Gastly':'gastly.jpeg','Gengar':'gengar.jpeg','Grimer':'grimer.jpeg','Muk':'muk.jpeg',
-  'Baltoy':'baltoy.jpeg','Claydol':'claydol.jpeg','Exeggcute':'exeggcute.jpeg','Exeggutor':'exeggcutor.jpeg',
+  'Baltoy':'baltoy.jpeg','Claydol':'claydol.png','Exeggcute':'exeggcute.png','Exeggutor':'exeggutor.png',
   'Fennekin':'fennekin.jpeg','Delphox':'delphox.png','Psyduck':'psyduck.png','Golduck':'golduck.jpeg',
   'Misdreavus':'misdreavus.png','Mismagius':'mismagius.png','Espurr':'espurr.jpeg','Meowstic':'meowstic.jpeg',
-  'A.Diglett':'alolan diglett.png','A.Dugtrio':'alolan dugtrio.png','Ferroseed':'ferroseed.jpeg','Ferrothorn':'ferrothorn.jpeg',
-  'Rolycoly':'rolycoly.jpeg','Coalossal':'coalossal.jpeg','Piplup':'piplup.jpeg','Empoleon':'empoleon.jpeg',
-  'Honedge':'honedge.jpeg','Aegislash':'aegislash.jpeg','Beldum':'beldum.jpeg','Metagross':'metagross.png',
-  'Carbink':'carbink.png','Diancie':'diancie.jpeg','Cottonee':'cottonee.jpeg','Whimsicott':'whimscott.jpeg',
-  'Litwick':'litwick.jpeg','Chandelure':'chandelure.jpeg','Popplio':'popplio.png','Primarina':'primarina.png',
-  'G.Ponyta':'galarian ponyta.jpeg','G.Rapidash':'galarian rapidash.jpeg','Clefairy':'clefairy.jpeg','Clefable':'clafable.jpeg',
+  'A.Diglett':'alolan diglett.png','A.Dugtrio':'a.dugtrio.png','Ferroseed':'ferroseed.jpeg','Ferrothorn':'ferrothorn.jpeg',
+  'Rolycoly':'rolycoly.jpeg','Coalossal':'coalossal.png','Piplup':'piplup.jpeg','Empoleon':'empoleon.jpeg',
+  'Honedge':'honedge.jpeg','Aegislash':'aegislash.jpeg','Beldum':'beldum.png','Metagross':'metagross.png',
+  'Carbink':'carbink.png','Diancie':'diancie.png','Cottonee':'cottonee.jpeg','Whimsicott':'whimscott.jpeg',
+  'Litwick':'litwick.jpeg','Chandelure':'chandelure.png','Popplio':'popplio.png','Primarina':'primarina.png',
+  'G.Ponyta':'galarian ponyta.jpeg','G.Rapidash':'galarian rapidash.jpeg','Clefairy':'clefairy.jpeg','Clefable':'clefable.png',
   'Riolu':'riolu.jpeg','Lucario':'lucario.jpeg','Grookey':'grookey.png','Rillaboom':'rillaboom.jpeg',
   'Torchic':'torchic.png','Blaziken':'blaziken.jpeg','Clobbopus':'clobbopus.jpeg','Grapploct':'grapploct.jpeg',
-  'Cubone':'cubone.jpeg','Marowak':'marowak.png','Timburr':'timburr.jpeg','Conkeldurr':'conkeldurr.jpeg',
+  'Cubone':'cubone.jpeg','Marowak':'marowak.png','Timburr':'timburr.jpeg','Conkeldurr':'conkeldurr.png',
   'Dratini':'dratini.png','Dragonair':'dragonair.png','Dragonite':'dragonite.png',
 };
 
@@ -427,7 +438,7 @@ function montaCarta({ nome, cor, icone, evoluido, dragao }) {
 
   const img = document.createElement('img');
   img.className = 'card-img';
-  img.src = 'img/pokemon/' + IMAGENS[nome];
+  img.src = DIR_POKEMON + IMAGENS[nome];
   img.alt = nome;
   img.loading = 'lazy';
   el.appendChild(img);
@@ -535,7 +546,7 @@ function montaCampos() {
 
     const img = document.createElement('img');
     img.className = 'campo-img';
-    img.src = 'img/biomas/' + regiao.id + '.jpg';
+    img.src = DIR_BIOMAS + regiao.id + '.jpg';
     img.alt = regiao.nome;
     img.loading = 'lazy';
     item.appendChild(img);
@@ -697,7 +708,7 @@ function montaFaixaCampos() {
   const alvo = document.getElementById('faixa-campos');
   REGIOES.forEach((regiao) => {
     const img = document.createElement('img');
-    img.src = 'img/biomas/' + regiao.id + '.jpg';
+    img.src = DIR_BIOMAS + regiao.id + '.jpg';
     img.alt = regiao.nome;
     img.loading = 'lazy';
     alvo.appendChild(img);

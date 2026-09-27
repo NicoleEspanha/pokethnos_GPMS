@@ -19,7 +19,7 @@
   "regionColor": "#2E7D32",
   "evolved": true,
   "dragon": false,
-  "imageFile": "exeggcutor.jpeg"
+  "imageFile": "exeggutor.png"
  },
  {
   "id": "fc188b5d-09d4-4202-b65a-852574eef41f",
@@ -41,7 +41,7 @@
   "regionColor": "#546E7A",
   "evolved": false,
   "dragon": false,
-  "imageFile": "beldum.jpeg"
+  "imageFile": "beldum.png"
  },
  {
   "id": "3ef2f195-3f11-419c-b8ed-446c74f7d89d",
@@ -63,7 +63,7 @@
   "regionColor": "#8B6914",
   "evolved": true,
   "dragon": false,
-  "imageFile": "archeops.jpeg"
+  "imageFile": "archeops.png"
  },
  {
   "id": "028570c1-c181-4259-9334-f090072bfd60",
@@ -96,7 +96,7 @@
   "regionColor": "#546E7A",
   "evolved": false,
   "dragon": false,
-  "imageFile": "doduo.jpeg"
+  "imageFile": "doduo.png"
  },
  {
   "id": "02d4d603-7e9b-4073-8471-fa99f12ecdc7",
@@ -107,7 +107,7 @@
   "regionColor": "#8B6914",
   "evolved": true,
   "dragon": false,
-  "imageFile": "diancie.jpeg"
+  "imageFile": "diancie.png"
  },
  {
   "id": "528fa094-3e10-4be2-8130-fb62c52037f3",
@@ -173,7 +173,7 @@
   "regionColor": "#8B6914",
   "evolved": true,
   "dragon": false,
-  "imageFile": "alolan dugtrio.png"
+  "imageFile": "a.dugtrio.png"
  },
  {
   "id": "977b4a0c-69cb-499c-91a5-e6108e8e99b6",
