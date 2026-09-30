@@ -8,7 +8,7 @@
   "regionColor": "#6A1B9A",
   "evolved": false,
   "dragon": false,
-  "imageFile": "honedge.jpeg"
+  "imageFile": "honedge.png"
  },
  {
   "id": "8712da40-f648-4927-bd46-31efe2087a51",
@@ -30,7 +30,7 @@
   "regionColor": "#1565C0",
   "evolved": true,
   "dragon": false,
-  "imageFile": "pelipper.jpeg"
+  "imageFile": "pelipper.png"
  },
  {
   "id": "4259d5d6-790c-4240-b9b5-615233ab885b",
@@ -52,7 +52,7 @@
   "regionColor": "#C62828",
   "evolved": false,
   "dragon": false,
-  "imageFile": "litwick.jpeg"
+  "imageFile": "litwick.png"
  },
  {
   "id": "e0cffbed-e314-45e2-8047-1bd2343ce455",
@@ -85,7 +85,7 @@
   "regionColor": "#546E7A",
   "evolved": false,
   "dragon": false,
-  "imageFile": "timburr.jpeg"
+  "imageFile": "timburr.png"
  },
  {
   "id": "41b3f5b7-297b-40bc-a573-0028d51cf213",
@@ -118,7 +118,7 @@
   "regionColor": "#546E7A",
   "evolved": false,
   "dragon": false,
-  "imageFile": "clefairy.jpeg"
+  "imageFile": "clefairy.png"
  },
  {
   "id": "455e774b-9e3c-440b-bd96-7aa198032d2c",
@@ -140,7 +140,7 @@
   "regionColor": "#6A1B9A",
   "evolved": true,
   "dragon": false,
-  "imageFile": "galarian rapidash.jpeg"
+  "imageFile": "g.rapidash.png"
  },
  {
   "id": "e7a4779f-374b-434c-9cd8-7c9f748ccdcc",
@@ -162,7 +162,7 @@
   "regionColor": "#2E7D32",
   "evolved": true,
   "dragon": false,
-  "imageFile": "whimscott.jpeg"
+  "imageFile": "whimsicott.png"
  },
  {
   "id": "b9c5c532-c67e-4dd3-9d24-fb424895a413",
@@ -195,6 +195,6 @@
   "regionColor": "#546E7A",
   "evolved": true,
   "dragon": false,
-  "imageFile": "meowstic.jpeg"
+  "imageFile": "meowstic.png"
  }
 ]
