@@ -1,14 +1,5 @@
 /* ==================================================================
    MODO APRESENTACAO — TEMPORARIO
-
-   O backend ainda nao esta neste repositorio, entao a interface roda
-   com um estado de partida guardado em src/demo/estado.json, capturado
-   de uma partida real do servidor Java. Nenhuma chamada de rede.
-
-   O CLIENTE HTTP ORIGINAL ESTA PRESERVADO NO FIM DESTE ARQUIVO, em
-   comentario. Para voltar ao normal depois da apresentacao:
-     1. apagar o bloco "MODO APRESENTACAO" (daqui ate a linha marcada)
-     2. descomentar o bloco "CLIENTE HTTP REAL"
    ================================================================== */
 
 import estadoBase from '../demo/estado.json';

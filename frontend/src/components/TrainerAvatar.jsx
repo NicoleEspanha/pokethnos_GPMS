@@ -1,4 +1,4 @@
-import sheet from '../assets/treinadores.png';
+import sheet from '../assets/treinadores.webp';
 
 /** Grid da prancha: 3 colunas x 2 linhas. */
 export const TRAINER_COLS = 3;

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import Card from './Card.jsx';
 import TrainerAvatar from './TrainerAvatar.jsx';
-import marrom from '../assets/biomas/marrom.jpg';
-import verde from '../assets/biomas/verde.jpg';
-import vermelho from '../assets/biomas/vermelho.jpg';
-import azul from '../assets/biomas/azul.jpg';
-import roxo from '../assets/biomas/roxo.jpg';
-import cinza from '../assets/biomas/cinza.jpg';
+import marrom from '../assets/biomas/marrom.webp';
+import verde from '../assets/biomas/verde.webp';
+import vermelho from '../assets/biomas/vermelho.webp';
+import azul from '../assets/biomas/azul.webp';
+import roxo from '../assets/biomas/roxo.webp';
+import cinza from '../assets/biomas/cinza.webp';
 
 /** Paisagem de cada bioma, indexada pelo id da região que vem do backend. */
 const BIOMAS = { marrom, verde, vermelho, azul, roxo, cinza };
