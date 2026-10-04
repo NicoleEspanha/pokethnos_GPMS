@@ -1,4 +1,9 @@
+import { useEffect, useRef } from 'react';
 import { imageUrl } from '../api/client.js';
+import { EVENTO_ZOOM } from './CardZoom.jsx';
+
+/** Janela para decidir se o clique foi simples ou o começo de um duplo. */
+const ESPERA_DUPLO_CLIQUE = 220;
 
 export default function Card({ card, onClick, selected, crown, disabled, title, draggable, onDragStart, onDragEnd }) {
   const classes = ['card'];
@@ -10,11 +15,43 @@ export default function Card({ card, onClick, selected, crown, disabled, title, 
   const img = imageUrl(card.imageFile);
   const borderColor = card.dragon ? '#c9a010' : card.regionColor;
 
+  const timer = useRef(null);
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  /**
+   * A jogada espera um instante antes de valer: se vier um segundo clique,
+   * ela é cancelada e abre o zoom. Sem isso, dar duplo clique numa carta da
+   * mesa recrutaria antes de a imagem aparecer.
+   */
+  function clique(e) {
+    if (disabled || !onClick) return;
+    // o React zera currentTarget ao sair do handler, e o clickRecruit da mesa
+    // precisa dele para animar a carta voando até a mão
+    const elemento = e.currentTarget;
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => {
+      timer.current = null;
+      onClick({
+        currentTarget: elemento,
+        target: elemento,
+        preventDefault() {},
+        stopPropagation() {},
+      });
+    }, ESPERA_DUPLO_CLIQUE);
+  }
+
+  function duploClique() {
+    clearTimeout(timer.current);
+    timer.current = null;
+    window.dispatchEvent(new CustomEvent(EVENTO_ZOOM, { detail: card }));
+  }
+
   return (
     <div
       className={classes.join(' ')}
       style={{ '--card-border': borderColor }}
-      onClick={!disabled ? onClick : undefined}
+      onClick={clique}
+      onDoubleClick={duploClique}
       title={title}
       draggable={draggable}
       onDragStart={onDragStart}

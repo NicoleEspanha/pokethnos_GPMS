@@ -4,6 +4,7 @@ import Setup from './components/Setup.jsx';
 import GameScreen from './components/GameScreen.jsx';
 import ScoringScreen from './components/ScoringScreen.jsx';
 import EndScreen from './components/EndScreen.jsx';
+import CardZoom from './components/CardZoom.jsx';
 import './styles/app.css';
 
 /** Tela de espera enquanto a partida salva é recarregada do backend.
@@ -36,21 +37,24 @@ function Restoring({ onGiveUp }) {
 export default function App() {
   const { state, error, busy, restoring, actions } = useGame();
 
+  let tela;
   if (restoring) {
-    return <Restoring onGiveUp={actions.newGame} />;
+    tela = <Restoring onGiveUp={actions.newGame} />;
+  } else if (!state) {
+    tela = <Setup onStart={actions.startGame} busy={busy} error={error} />;
+  } else if (state.phase === 'GAME_OVER') {
+    tela = <EndScreen state={state} onNewGame={actions.newGame} />;
+  } else if (state.phase === 'SCORING') {
+    tela = <ScoringScreen state={state} actions={actions} />;
+  } else {
+    tela = <GameScreen state={state} actions={actions} error={error} />;
   }
 
-  if (!state) {
-    return <Setup onStart={actions.startGame} busy={busy} error={error} />;
-  }
-
-  if (state.phase === 'GAME_OVER') {
-    return <EndScreen state={state} onNewGame={actions.newGame} />;
-  }
-
-  if (state.phase === 'SCORING') {
-    return <ScoringScreen state={state} actions={actions} />;
-  }
-
-  return <GameScreen state={state} actions={actions} error={error} />;
+  // o zoom fica fora da tela da vez para valer em qualquer uma delas
+  return (
+    <>
+      {tela}
+      <CardZoom />
+    </>
+  );
 }
