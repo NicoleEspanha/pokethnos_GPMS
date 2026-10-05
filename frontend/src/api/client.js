@@ -137,7 +137,7 @@ function precisaServidor() {
   throw new Error('Esta jogada depende do servidor, que ainda nao esta no repositorio.');
 }
 
-export const api = {
+const demoApi = {
   createGame: async (playerNames, avatars) => {
     usadasDaReserva = 0;
     iniciado = true;
@@ -189,17 +189,12 @@ export const api = {
   chooseLeaderSecond: precisaServidor,
 };
 
-// As imagens dos Pokemon ficam em public/imagens-pokemon/ enquanto o
-// backend nao esta no repositorio para servi-las.
-export const imageUrl = (file) =>
-  file ? `imagens-pokemon/${encodeURIComponent(file)}` : null;
-
-/* ================= FIM DO BLOCO "MODO APRESENTACAO" =================
-   Apagar daqui para cima (a partir dos imports) ao restaurar.
-   ================================================================== */
+/* ================= FIM DO BLOCO "MODO APRESENTACAO" ================= */
 
 /* ==================================================================
-   CLIENTE HTTP REAL — descomentar depois da apresentacao
+   CLIENTE HTTP REAL (padrao). Para o modo demo offline, suba o Vite com
+   VITE_DEMO=true.
+   ================================================================== */
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
 
@@ -222,7 +217,7 @@ async function request(path, { method = 'GET', body } = {}) {
   return res.status === 204 ? null : res.json();
 }
 
-export const api = {
+const httpApi = {
   createGame: (playerNames, avatars) => request('/api/games', { method: 'POST', body: { playerNames, avatars } }),
   getGame: (id) => request(`/api/games/${id}`),
   acknowledgePass: (id) => request(`/api/games/${id}/actions/acknowledge-pass`, { method: 'POST' }),
@@ -243,6 +238,8 @@ export const api = {
   chooseLeaderSecond: (id, cardId) => request(`/api/games/${id}/actions/choose-leader-second`, { method: 'POST', body: { cardId } }),
 };
 
-export const imageUrl = (file) => (file ? `${BASE_URL}/imagens-pokemon/${encodeURIComponent(file)}` : null);
+export const api = import.meta.env.VITE_DEMO === 'true' ? demoApi : httpApi;
 
-   ================================================================== */
+// As imagens dos Pokemon ficam em public/imagens-pokemon/ (o backend nao as serve).
+export const imageUrl = (file) =>
+  file ? `imagens-pokemon/${encodeURIComponent(file)}` : null;
