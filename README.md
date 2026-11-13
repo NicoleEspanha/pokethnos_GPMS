@@ -83,3 +83,11 @@ O jogo abre em http://localhost:5173.
 
 - A partida fica guardada na memória do backend. Se reiniciar o backend, a partida some e volta para a tela inicial.
 - As imagens dos Pokémon ficam em `frontend/public/imagens-pokemon/` e são `.webp`.
+
+## Comandos de teste
+
+| Tipo | Testes | O que cobre | Rodar só este tipo |
+|---|---|---|---|
+| Unitários | 74 | Bando, Jogador, tabuleiro, dados do jogo, pontuação, compra de cartas, 6 habilidades | `mvn test -Dgroups=unit` |
+| Integração | 59 | GameService no contexto Spring, API com validação e erros 400/404/409 | `mvn test -Dgroups=integration` |
+| Sistema | 6 | Partidas inteiras por HTTP com 2, 3, 4 e 6 jogadores, partidas simultâneas, retomada após F5 | `mvn test -Dgroups=system` |
